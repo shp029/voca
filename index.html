@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>단어노트</title>
+  <title>영어 타파</title>
   <style>
     :root { --ink:#18202b; --muted:#697586; --line:#e7eaf0; --blue:#3659e3; --soft:#f5f7ff; --bg:#fafbfc; }
     * { box-sizing:border-box; }
@@ -83,6 +83,8 @@
   <dialog id="matchingModal"><div class="modal"><h2 id="matchingTitle">매칭 게임</h2><p class="study-progress">왼쪽 뜻을 누른 뒤 알맞은 단어를 골라 주세요.</p><div id="matchGrid" class="match-grid"></div><p id="matchFeedback" class="quiz-feedback"></p><div class="actions"><button class="secondary" onclick="matchingModal.close()">끝내기</button><button id="matchingAgain" class="primary" onclick="startMatching(data.game.mode)" hidden>다시 하기</button></div></div></dialog>
   <dialog id="editBookModal"><form class="modal" method="dialog" onsubmit="saveBookEdit(event)"><h2>단어장 관리</h2><label>단어장 이름<input id="editBookName" required /></label><div class="actions"><button class="secondary" value="cancel">취소</button><button class="primary">저장</button></div></form></dialog>
   <dialog id="editSectionModal"><form class="modal" method="dialog" onsubmit="saveSectionEdit(event)"><h2>섹션 관리</h2><label>섹션 이름<input id="editSectionName" required /></label><label>속한 단어장<select id="sectionBook"></select></label><div class="actions"><button class="secondary" value="cancel">취소</button><button class="primary">저장</button></div></form></dialog>
+ <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
   <script>
     const key='wordnote-data-v1';
     let data=JSON.parse(localStorage.getItem(key)||'null') || {books:[{id:Date.now(),name:'나의 첫 단어장',sections:[{id:Date.now()+1,name:'기본 단어',words:[{id:Date.now()+2,term:'welcome',meaning:'환영하다; 환영',note:''},{id:Date.now()+3,term:'practice',meaning:'연습하다; 연습',note:''}]}]}], selected:null, pendingSection:null};
